@@ -1,0 +1,23 @@
+services:
+  dnsserver:
+    build: dnsserver
+    hostname: server1
+    #command: sleep infynity
+    networks:
+      rededns:
+        ipv4_address: 192.168.5.10
+    volumes:
+      - ./dnsserver/named.conf.local:/etc/bind/named.conf.local
+  cliente:
+    build: cliente
+    hostname: cliente1
+    dns: 192.168.5.10
+    #command: sleep infynity
+    networks:
+      rededns:
+
+networks:
+  rededns:
+    ipam:
+      config:
+        - subnet: 192.168.5.0/24
