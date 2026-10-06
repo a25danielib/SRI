@@ -12,4 +12,4 @@ RUN apt update && \
     rm -rf var/lib/apt/lists/*
 
 
-ENTRYPOINT ["sleep","infinity"] ss
+ENTRYPOINT ["sleep","infinity"]
