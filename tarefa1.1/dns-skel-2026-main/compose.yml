@@ -36,6 +36,16 @@ services:
       rededns:
         ipv4_address: 192.168.20.10
 
+  mandalorian:
+      build: dnsserver
+      hostname: mandalorian
+      volumes:
+        - ./mandalorian/named.conf.options:/etc/bind/named.conf.options
+        - ./mandalorian/named.conf.local:/etc/bind/named.conf.local
+      networks:
+        rededns:
+          ipv4_address: 192.168.20.15
+          
   darthsidious:
     build: dnsserver
     hostname: darthsidious
