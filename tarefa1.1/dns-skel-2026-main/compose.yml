@@ -46,6 +46,25 @@ services:
     networks:
       rededns:
         ipv4_address: 192.168.20.15
+  cliente:
+     build: cliente
+     hostname: cliente1
+     networks:
+       rededns:
+         ipv4_address: 192.168.20.110
+     volumes:
+       - ./cliente/rndc.conf:/etc/bind/rndc.conf
+       - ./cliente/chave.key:/etc/bind/chave.key
+       - ./cliente/actualiza.txt:/etc/bind/actualiza.txt
+     dns: 
+     - 192.168.20.10
+     - 192.168.20.11
+
+networks:
+  rededns:
+    ipam:
+      config:
+        - subnet: 192.168.20.0/24
 
   # darthsidious:
   #   build: dnsserver
@@ -72,24 +91,4 @@ services:
   #     - ./dnsserver/root.hints:/usr/share/dns/root.hints
   #   networks:
   #     rededns:
-  #       ipv4_address: 192.168.20.50        
-
-  # cliente:
-  #   build: cliente
-  #   hostname: cliente1
-  #   networks:
-  #     rededns:
-  #       ipv4_address: 192.168.20.110
-  #   volumes:
-  #     - ./cliente/rndc.conf:/etc/bind/rndc.conf
-  #     - ./cliente/chave.key:/etc/bind/chave.key
-  #     - ./cliente/actualiza.txt:/etc/bind/actualiza.txt
-  #   dns: 
-  #   - 192.168.20.10
-  #   - 192.168.20.11
-
-networks:
-  rededns:
-    ipam:
-      config:
-        - subnet: 192.168.20.0/24
+  #       ipv4_address: 192.168.20.50 
