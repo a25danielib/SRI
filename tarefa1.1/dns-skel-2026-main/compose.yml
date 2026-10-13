@@ -60,24 +60,24 @@ services:
      - 192.168.20.10
      - 192.168.20.11
 
+  darthsidious:
+    build: dnsserver
+    hostname: darthsidious
+    depends_on:
+    - darthvader
+    volumes:
+      - ./darthsidious/named.conf.options:/etc/bind/named.conf.options
+      - ./darthsidious/named.conf.local:/etc/bind/named.conf.local
+      - ./dnsserver/root.hints:/usr/share/dns/root.hints      
+    networks:
+      rededns:
+        ipv4_address: 192.168.20.11    
+
 networks:
   rededns:
     ipam:
       config:
-        - subnet: 192.168.20.0/24
-
-  # darthsidious:
-  #   build: dnsserver
-  #   hostname: darthsidious
-  #   depends_on:
-  #     - darthvader
-  #   volumes:
-  #     - ./darthsidious/named.conf.options:/etc/bind/named.conf.options
-  #     - ./darthsidious/named.conf.local:/etc/bind/named.conf.local
-  #     - ./dnsserver/root.hints:/usr/share/dns/root.hints      
-  #   networks:
-  #     rededns:
-  #       ipv4_address: 192.168.20.11        
+        - subnet: 192.168.20.0/24    
 
   # delegado:
   #   build: dnsserver
